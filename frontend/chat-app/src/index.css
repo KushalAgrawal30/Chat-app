@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('./background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    background-color: #1a1a1d;
+    justify-content: center;
+}
+

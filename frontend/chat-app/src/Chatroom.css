@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.container{
+    background-color: #1a1a1d !important; /* Dark background */
+    width: 90%; /* Adjust width for better responsiveness */
+    width: 80%; 
+    max-width: 1200px;
+    min-width: 80vw;
+    margin:  auto;
+    min-height: 80vh;
+    height: auto; /* Allow flexible height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1% 2%; /* Use percentages for better responsiveness */
+    color: white;
+    border-radius: 10px;
+    position: relative;
+    min-height: 90vh;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.top-bar {
+    position: relative;
+    width: 100%;
+    background-color: #1a1a1d; /* Dark background */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1px 20px;
+    border-bottom: 1px solid #302f32;
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-info{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.top-bar .user-info img{
+    border-radius: 50%;
+    width: 40px;  
+    height: 40px;
+    margin-left: 20px;
+}
+
+
+.top-bar button{
+    background-color: #28272a;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 18px;
+    width: 40px; /* Ensures circular shape */
+    height: 40px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.top-bar button:hover{
+    background-color: #ffcc00;
+    color: black;
+}
+
+
+.join-room {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center vertically */
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin-bottom: 80px;
+    flex-grow: 1; /* Helps it push to the center */
+}
+
+.join-room h1{
+    font-family: "Popins", sans-serif;
+    margin-bottom: 40px;
+    font-size: 40px;
+}
+
+.join-room input {
+    width: 80%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 30px;
+    background-color: #222;
+    color: white;
+    text-align: center;
+}
+
+.join-room button {
+    width: 60%;
+    padding: 10px;
+    background-color: #f2b040;
+    color: black;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.join-room button:hover {
+    background-color: #dc753e;
+}
+
+
+.login-class{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center vertically */
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 80px;
+    flex-grow: 1;
+}
+
+.login-class h2{
+    font-family: "Popins", sans-serif;
+    margin-bottom: 40px;
+    font-size: 70px;
+}
+
+.login-class .google-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b6df3;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    color: wheat;
+    transition: 0.3s;
+    width: 250px;
+}
+
+.login-class .google-login-btn:hover{
+    background-color: #6b8ff3;
+}
+
+.message-area{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-family: "Popins", sans-serif;
+}
+
+
+.message-list{
+    width: 100%;
+    max-width: 1100px;
+    padding: 10px;
+    padding-top: 6vw;
+    min-width: 80vw;
+    height: 65vh; /* Set a fixed height */
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    background: #1a1a1d; /* Optional: background for visibility */
+    border-radius: 10px;
+    flex-grow: 1;
+}
+
+.message-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.message-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+
+.message-box {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    max-width: 70%;
+}
+
+.message-box .message-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align timestamp properly */
+}
+
+.message-box .timestamp{
+    font-size: 9px;
+    color: #888;
+    margin-top: 4px;
+    margin-right: 4px;
+    text-align: right;
+}
+
+.left {
+    align-self: flex-start;
+    background: #1a1a1d;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+    color: black;
+}
+
+.right {
+    align-self: flex-end;
+    background: #1a1a1d;
+    color: white;
+    justify-content: flex-end;
+}
+
+.message-box .message-bubble{
+    position: relative;
+    padding: 12px 18px;
+    color: white;
+    background: #4876f6;
+    border-radius: 15px;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+.message-box img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.right .message-bubble{
+    background: #2c2b32;
+
+}
+
+.right img{
+    margin-left: 10px;
+}
+
+.left .message-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align timestamp properly */
+}
+
+.left .message-content .timestamp{
+    margin-left: 4px;
+}
+
+.input-class {
+    width: 100%;
+    display: flex;
+    max-width: 1500px;
+    margin: auto;
+    margin-bottom: 2%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: #1a1a1d;
+    position: sticky;
+}
+
+.input-class form{
+    display: flex;
+    width: 100%;
+    max-width: 1300px;
+    gap: 10px; /* Space between input and button */
+}
+
+.input-class input {
+    flex-grow: 1; /* Makes input take most of the space */
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    outline: none;
+    background-color: #222;
+    color: white;
+}
+
+.input-class button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2b040;
+    border: none;
+    border-radius: 50%; /* Circular button */
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-right: 20px;
+}
+
+.input-class button:hover {
+    background-color: #dc753e;
+}
