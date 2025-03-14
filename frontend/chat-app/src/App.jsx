@@ -8,6 +8,7 @@ function App() {
 
   const PrivateRoute = ({children}) => {
     const token = localStorage.getItem("token");
+    console.log(children)
     return token ? children : <Navigate to="/" replace/>;
   }
 

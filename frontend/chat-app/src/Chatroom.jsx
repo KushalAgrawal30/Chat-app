@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {io} from 'socket.io-client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRightFromBracket,faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faRightFromBracket, faPaperPlane, faImage } from '@fortawesome/free-solid-svg-icons'
 
 import './Chatroom.css'
 
@@ -17,6 +17,7 @@ function ChatRoom(){
 
     const [sendMessage, setSendMessage] = useState("")
     const [recievedMessage, setRecievedMessage] = useState([])
+    const [selectedImage, setSelectedImage] = useState(null)
 
     const user = JSON.parse(localStorage.getItem("user"))
     
@@ -31,7 +32,6 @@ function ChatRoom(){
         })
 
         newSocket.on('recieve-message' ,(data) => {
-            console.log(data)
             setRecievedMessage((messages) => [...messages, data])
         })
 
@@ -49,6 +49,17 @@ function ChatRoom(){
         }
     }, [recievedMessage]);
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]
+        if(file){
+            const reader = new FileReader()
+            reader.onload = () => {
+                setSelectedImage(reader.result)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+    
     const handleRoomJoin = (e) => {
         e.preventDefault()
         if(roomName.trim() === ""){
@@ -73,9 +84,11 @@ function ChatRoom(){
 
     const handleMessageSend = (e) => {
         e.preventDefault()
-        socket.emit('send-message', {sendMessage, roomName,userImg:user?.picture, userName:user?.name, messageBool:true, timestamp:Date.now()})
-        setRecievedMessage((messages) => [...messages, {sendMessage, roomName,userImg:user?.picture, userName:user?.name, messageBool:false, timestamp:Date.now()}])
+        if(!sendMessage.trim() && !selectedImage) return
+        socket.emit('send-message', {sendMessage, roomName,userImg:user?.picture, userName:user?.name, messageBool:true, timestamp:Date.now(), image:selectedImage})
+        setRecievedMessage((messages) => [...messages, {sendMessage, roomName,userImg:user?.picture, userName:user?.name, messageBool:false, timestamp:Date.now(), image:selectedImage}])
         setSendMessage("")
+        setSelectedImage(null)
     }
 
 
@@ -83,7 +96,7 @@ function ChatRoom(){
     <div className="container">
         <div className="top-bar">
             <div className="user-info">
-            <img src={user.picture} alt="Profile" width="100" referrerPolicy="no-referrer"></img>
+            <img src={user?.picture} alt="Profile" width="100" referrerPolicy="no-referrer"></img>
             <h2>{user?.name}</h2>
             </div>
             <button onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} /></button>
@@ -109,10 +122,16 @@ function ChatRoom(){
                     <>
                     <div className={`message-box ${m.messageBool ? "left" : "right"}`}>
                         <div className="message-content">
-                            <div className="message-bubble">{m.sendMessage}</div>
+                            {m.image ? (
+                                <img src={m.image} alt="Sent" className="sent-image"/>
+                            ) : (
+                                <div className="message-bubble">{m.sendMessage}</div>
+                            )
+
+                            }
                             <span className="timestamp">{new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                         </div>
-                        <img className="message-box-img" src={m.userImg} alt="Profile" width="100" />
+                        <img className="message-box-img" src={m?.userImg} referrerPolicy="no-referrer" alt="Profile" width="100" />
                     </div>
                     </>
                 ))}
@@ -120,10 +139,22 @@ function ChatRoom(){
             </div>
             
             <div className="input-class">
+                {/* Image Preview */}
+            {selectedImage && (
+                <div className="image-preview">
+                    <img src={selectedImage} alt="Preview" className="preview-img" />
+                    <button className="remove-preview" onClick={() => setSelectedImage(null)}>✖</button>
+                </div>
+            )}
             <form onSubmit={handleMessageSend}>
                 <input value={sendMessage} onChange={e => setSendMessage(e.target.value)} placeholder="Enter Message" />
+                    <label>
+                        <FontAwesomeIcon icon={faImage}/>
+                        <input type="file" accept="image/*" onChange={handleImageChange} hidden />
+                    </label>
                 <button type="submit"><FontAwesomeIcon icon={faPaperPlane} /></button>
             </form>
+            
             </div>
             </div>
             </>

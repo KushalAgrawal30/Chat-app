@@ -17,6 +17,8 @@ const GoogleAuth = () => {
             .then(res => res.json())
             .then(user => {
                 console.log("User info:", user);
+                console.log(tokenResponse)
+                console.log(tokenResponse.access_token)
                 localStorage.setItem("token", tokenResponse.access_token);
                 localStorage.setItem("user", JSON.stringify(user));
                 navigate('/chat-room');

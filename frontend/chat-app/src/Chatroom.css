@@ -59,8 +59,8 @@
     cursor: pointer;
     transition: 0.3s;
     font-size: 18px;
-    width: 40px; /* Ensures circular shape */
-    height: 40px;
+    width: 45px; /* Ensures circular shape */
+    height: 45px;
     margin-left: auto;
     margin-right: 20px;
 }
@@ -298,6 +298,25 @@
     color: white;
 }
 
+.input-class label{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px;
+    background-color: #222;
+    border: none;
+    border-radius: 50%; /* Circular button */
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.input-class label:hover{
+    background-color: #dc753e;
+}
+
 .input-class button {
     width: 50px;
     height: 50px;
@@ -315,4 +334,53 @@
 
 .input-class button:hover {
     background-color: #dc753e;
+}
+
+.image-preview {
+    position: absolute;
+    bottom: 60px; /* Adjust based on input box height */
+    left: 20px;
+    background: #212025;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+    justify-content: center;
+    min-width: 18vw;
+    max-width: 20vw;
+    min-height: 13vw;
+    max-height: 20vw;
+}
+
+.preview-img {
+    max-width: 18vw;
+    max-height: 18vw;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.image-preview .remove-preview {
+    position: absolute;
+    top: -0.5vw;
+    right: -2vw;
+    background: #f2b040;
+    color: white;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.message-content .sent-image{
+    width: 50%;
+    height: 30%;
+    border-radius: 10px;
+    margin-top: 5px;
 }
