@@ -25,7 +25,6 @@ io.on("connection", async (socket) => {
     })
 
     socket.on('send-message', (data) => {
-        console.log(data)
         socket.to(data.roomName).emit('recieve-message', data)
     })
 

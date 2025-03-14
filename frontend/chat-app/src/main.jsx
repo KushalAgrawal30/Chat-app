@@ -4,7 +4,7 @@ import App from './App.jsx'
 import {BrowserRouter} from 'react-router-dom'
 import {GoogleOAuthProvider} from '@react-oauth/google'
 
-const CLIENT_ID = "917891767661-ekdcetsu31rh9nilk80ip8hernkgr14m.apps.googleusercontent.com"
+const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
