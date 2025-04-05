@@ -70,6 +70,10 @@
     color: black;
 }
 
+.top-bar .nav-btns{
+    display: flex;
+    flex-direction: row;
+}
 
 .join-room {
     display: flex;
@@ -85,7 +89,7 @@
 }
 
 .join-room h1{
-    font-family: "Popins", sans-serif;
+    font-family: "Poppins", sans-serif;
     margin-bottom: 40px;
     font-size: 40px;
 }
@@ -133,7 +137,7 @@
 }
 
 .login-class h2{
-    font-family: "Popins", sans-serif;
+    font-family: "Poppins", sans-serif;
     margin-bottom: 40px;
     font-size: 70px;
 }
@@ -166,7 +170,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    font-family: "Popins", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 
@@ -384,3 +388,54 @@
     border-radius: 10px;
     margin-top: 5px;
 }
+
+.nav-btns .user-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-btns .dropdown-content{
+    display: flex;
+    flex-direction: column;
+    top: 80px;
+    max-height: 40vh;
+    align-items: start;
+    position: absolute;
+    padding: 5px 0;
+    background-color: #222;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    border: 1px solid #222;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.dropdown-content .user-info{
+    margin-right: 13px;
+}
+
+.nav-btns .dropdown-content img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 1px;
+}
+
+.nav-btns .dropdown-content p{
+    font-size: 14px;
+}
+
+
+
+
+/* width: 100%;
+    display: flex;
+    max-width: 1500px;
+    margin: auto;
+    margin-bottom: 2%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: #1a1a1d;
+    position: sticky; */

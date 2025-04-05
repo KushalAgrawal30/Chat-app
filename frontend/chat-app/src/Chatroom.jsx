@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {io} from 'socket.io-client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRightFromBracket, faPaperPlane, faImage } from '@fortawesome/free-solid-svg-icons'
+import { faRightFromBracket, faUsers, faPaperPlane, faImage } from '@fortawesome/free-solid-svg-icons'
+import { ToastContainer, toast } from 'react-toastify'
 
 import './Chatroom.css'
 
@@ -18,6 +19,10 @@ function ChatRoom(){
     const [sendMessage, setSendMessage] = useState("")
     const [recievedMessage, setRecievedMessage] = useState([])
     const [selectedImage, setSelectedImage] = useState(null)
+
+    const [allUsers, setAllUsers] = useState([])
+
+    const [showDropown, setShowDropdown] = useState(false)
 
     const user = JSON.parse(localStorage.getItem("user"))
     
@@ -35,6 +40,19 @@ function ChatRoom(){
             setRecievedMessage((messages) => [...messages, data])
         })
 
+        newSocket.on('user-joined', (data) => {
+            setAllUsers((users) => [...users, data])
+            toast(`${data.userName} joined`)
+        })
+
+        newSocket.on('room-users', (data)=>{
+            setAllUsers(data)
+        })
+
+        newSocket.on('user-left', (data) => {
+            toast(`${data.userName} left`)
+        })
+
         return () => {
             newSocket.removeAllListeners();
             newSocket.disconnect();
@@ -47,6 +65,7 @@ function ChatRoom(){
         if (messageListRef.current) {
             messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
         }
+
     }, [recievedMessage]);
 
     const handleImageChange = (e) => {
@@ -93,13 +112,37 @@ function ChatRoom(){
 
 
     return(
+    <>
+    <ToastContainer
+    position="top-center"
+    hideProgressBar={false}
+    theme="dark"
+    newestOnTop
+    />
     <div className="container">
         <div className="top-bar">
             <div className="user-info">
             <img src={user?.picture} alt="Profile" width="100" referrerPolicy="no-referrer"></img>
             <h2>{user?.name}</h2>
             </div>
-            <button onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} /></button>
+            <div className="nav-btns">
+                {!joinRoomBool && (
+                <div className="user-wrapper">
+                    <button onClick={() => setShowDropdown(prev => !prev)} className="users"><FontAwesomeIcon icon={faUsers} /></button>
+                    {showDropown && (
+                    <div className="dropdown-content">
+                    {allUsers.map((m,i) => (
+                        <div className="user-info">
+                            <img referrerPolicy="no-referrer" src={m.userPicture}></img>
+                            <p>{m.userName}</p>
+                        </div>
+                    ))}
+                    </div>
+                    )}
+                </div>
+                )}
+                <button onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} /></button>
+            </div>
         </div>
         <div className="join-room">
             {joinRoomBool && (
@@ -161,6 +204,7 @@ function ChatRoom(){
             )}
         
     </div>
+    </>
     )
 }
 
