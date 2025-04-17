@@ -28,7 +28,7 @@ function ChatRoom(){
     
 
     useEffect(() => {
-        const newSocket = io("http://localhost:3000/");
+        const newSocket = io(`${import.meta.env.VITE_REACT_APP_BACKEND_BASE_URL}`);
         setSocket(newSocket);
 
         newSocket.on("connect", () => {
@@ -182,7 +182,6 @@ function ChatRoom(){
             </div>
             
             <div className="input-class">
-                {/* Image Preview */}
             {selectedImage && (
                 <div className="image-preview">
                     <img src={selectedImage} alt="Preview" className="preview-img" />
