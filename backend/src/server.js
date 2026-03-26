@@ -17,8 +17,8 @@ const io = new Server(server, {
  
 let all_users = []
 
-io.on("connection", async (socket) => {
-    console.log(`User ${socket.id} connected`)
+io.on("connection",  (socket) => {
+    console.log(User ${socket.id} connected`)
 
     socket.on('join-room', (data) => {
         all_users.push(data)
